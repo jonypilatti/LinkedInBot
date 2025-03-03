@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  bot:
+    build: .
+    container_name: linkedin-bot
+    # If you need to forward environment variables or mount volumes:
+    # environment:
+    #   - LINKEDIN_CLIENT_ID=${LINKEDIN_CLIENT_ID}
+    #   - LINKEDIN_CLIENT_SECRET=${LINKEDIN_CLIENT_SECRET}
+    volumes:
+      - .:/app
+    # If you have a web server, you could map ports here, e.g.:
+    # ports:
+    #   - "8000:8000"
+    command: python client_interface.py
+
+  test:
+    build: .
+    container_name: linkedin-bot-tests
+    # Reuse the same code and environment
+    volumes:
+      - .:/app
+    command: pytest tests/

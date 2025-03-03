@@ -1,0 +1,14 @@
+{
+  "linkedin": {
+    "client_id": "",
+    "client_secret": "",
+    "redirect_uri": "http://localhost:8000/callback"
+  },
+  "lm_studio": {
+    "api_url": "http://localhost:1234/v1"
+  },
+  "options": {
+    "current_company": "",
+    "skills": "NextJS/Python with FastAPI or NodeJS+ExpressJS"
+  }
+}

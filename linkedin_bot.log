@@ -1,0 +1,203 @@
+2025-03-03 17:54:47,526 - __main__ - INFO - Successfully authenticated with LinkedIn
+2025-03-03 17:54:48,028 - __main__ - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 17:54:48,032 - __main__ - INFO - No action specified. Use --contact-recruiters or --apply-jobs
+2025-03-03 18:31:55,340 - linkedin_bot - INFO - Successfully authenticated with LinkedIn
+2025-03-03 18:31:55,852 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:35:28,384 - linkedin_bot - INFO - Successfully authenticated with LinkedIn
+2025-03-03 18:35:28,929 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:35:35,438 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=YOUR_LINKEDIN_CLIENT_ID, redirect_uri=http://localhost:8000/callback
+2025-03-03 18:35:35,439 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 18:35:35,439 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 18:35:35,439 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 18:35:35,439 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 18:35:35,439 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 18:35:35,440 - linkedin_bot - INFO - Token loaded successfully, access_token=test_token
+2025-03-03 18:35:35,440 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 18:35:35,440 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 18:35:35,931 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:35:35,931 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}', 'status': 'error'}
+2025-03-03 18:36:00,337 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 18:36:00,338 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 18:36:00,338 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 18:36:00,338 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 18:36:00,338 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 18:36:00,338 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 18:36:00,338 - linkedin_bot - INFO - Token loaded successfully, access_token=test_token
+2025-03-03 18:36:00,339 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 18:36:00,339 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 18:36:00,828 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:36:00,828 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}', 'status': 'error'}
+2025-03-03 18:36:17,730 - linkedin_bot - INFO - Generating message using LMStudio with prompt_template=Hello from the test!, context={}
+2025-03-03 18:41:34,479 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 18:41:34,479 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 18:41:34,480 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 18:41:34,480 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 18:41:34,480 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 18:41:34,480 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 18:41:34,481 - linkedin_bot - INFO - Token loaded successfully, access_token=test_token
+2025-03-03 18:41:34,481 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 18:41:34,481 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 18:41:35,035 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:41:35,035 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}', 'status': 'error'}
+2025-03-03 18:42:43,514 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=YOUR_LINKEDIN_CLIENT_ID, redirect_uri=http://localhost:8000/callback
+2025-03-03 18:42:43,515 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 18:42:43,515 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 18:42:43,515 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 18:42:43,515 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 18:42:43,515 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 18:42:43,516 - linkedin_bot - INFO - Token loaded successfully, access_token=test_token
+2025-03-03 18:42:43,516 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 18:42:43,516 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 18:42:44,001 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:42:44,002 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}', 'status': 'error'}
+2025-03-03 18:46:29,725 - linkedin_bot - INFO - Generating message using LMStudio with prompt_template=GOD ?, context={}
+2025-03-03 18:47:11,127 - linkedin_bot - INFO - Generating message using LMStudio with prompt_template=QUE PENSAS DE LOS COMUNISTAS, context={}
+2025-03-03 18:51:06,704 - linkedin_bot - INFO - Generating message using LMStudio with prompt_template=che y que onda con dios, context={}
+2025-03-03 18:55:35,162 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 18:55:35,162 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 18:55:35,163 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 18:55:35,163 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 18:55:35,164 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 18:55:35,164 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 18:55:35,164 - linkedin_bot - INFO - Token loaded successfully, access_token=test_token
+2025-03-03 18:55:35,165 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 18:55:35,165 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 18:55:35,689 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:55:35,689 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}', 'status': 'error'}
+2025-03-03 18:55:37,344 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 18:55:37,345 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 18:55:37,345 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 18:55:37,345 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 18:55:37,345 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 18:55:37,345 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 18:55:37,345 - linkedin_bot - INFO - Token loaded successfully, access_token=test_token
+2025-03-03 18:55:37,345 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 18:55:37,346 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 18:55:37,827 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:55:37,828 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}', 'status': 'error'}
+2025-03-03 18:57:35,772 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 18:57:35,773 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 18:57:35,773 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 18:57:35,774 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 18:57:35,774 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 18:57:35,774 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 18:57:35,775 - linkedin_bot - INFO - Token loaded successfully, access_token=test_token
+2025-03-03 18:57:35,775 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 18:57:35,775 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 18:57:36,269 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2025-03-03 18:57:36,269 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}', 'status': 'error'}
+2025-03-03 18:57:44,887 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=YOUR_LINKEDIN_CLIENT_ID, redirect_uri=http://localhost:8000/callback
+2025-03-03 18:57:44,888 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 18:57:44,889 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 18:57:44,889 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 18:57:44,890 - linkedin_bot - INFO - Authenticating with LinkedIn using auth_code=AQXR4QUtY2xJJZIJrB8MfvN8h_N8AIPhOdrrUG6NOheTHD_tS6xL6PTzHNGfrIM2AcHAZFoNtN8LdDSSkJNqcgrdg116vftJlKBFVi1ntQXAfCyhywI8rYxCHMaabyTbcTHaBfXhEXe5Q39ZnVg0yYLx20N-yz5BV08eiH25LBsAhgZJ3rO8lRHj_222AcBHPJ2oT45nw2tQiiGK27y66xiFKFFklqTxUYqNGED_JOGezCQZu1RcN89Uvt4HkPRIlL6OynGljqQVns8HHiKAOAfAFYa_-POZPoULkUhL-zfyB_p_MUUvTrzs12fiaAJmELit11bFjOTAPdAOYg08163fSCr4yQ
+2025-03-03 18:57:45,249 - linkedin_bot - ERROR - Authentication failed with status=401, response={"error":"invalid_request","error_description":"Unable to retrieve access token: authorization code not found"}
+2025-03-03 18:57:45,251 - linkedin_bot - ERROR - Failed to authenticate with LinkedIn
+2025-03-03 19:02:08,514 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=YOUR_LINKEDIN_CLIENT_ID, redirect_uri=http://localhost:8000/callback
+2025-03-03 19:02:08,515 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 19:02:08,515 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 19:02:08,515 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 19:02:08,515 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 19:02:08,515 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 19:02:08,516 - linkedin_bot - INFO - Token loaded successfully, access_token=AQXR4QUtY2xJJZIJrB8MfvN8h_N8AIPhOdrrUG6NOheTHD_tS6xL6PTzHNGfrIM2AcHAZFoNtN8LdDSSkJNqcgrdg116vftJlKBFVi1ntQXAfCyhywI8rYxCHMaabyTbcTHaBfXhEXe5Q39ZnVg0yYLx20N-yz5BV08eiH25LBsAhgZJ3rO8lRHj_222AcBHPJ2oT45nw2tQiiGK27y66xiFKFFklqTxUYqNGED_JOGezCQZu1RcN89Uvt4HkPRIlL6OynGljqQVns8HHiKAOAfAFYa_-POZPoULkUhL-zfyB_p_MUUvTrzs12fiaAJmELit11bFjOTAPdAOYg08163fSCr4yQ
+2025-03-03 19:02:08,516 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 19:02:08,516 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 19:02:09,064 - linkedin_bot - ERROR - API request failed: 403 - {"status":403,"serviceErrorCode":100,"code":"ACCESS_DENIED","message":"Not enough permissions to access: me.GET.NO_VERSION"}
+2025-03-03 19:02:09,065 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":403,"serviceErrorCode":100,"code":"ACCESS_DENIED","message":"Not enough permissions to access: me.GET.NO_VERSION"}', 'status': 'error'}
+2025-03-03 19:08:07,818 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=YOUR_LINKEDIN_CLIENT_ID, redirect_uri=http://localhost:8000/callback
+2025-03-03 19:08:07,819 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 19:08:07,819 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 19:08:07,819 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 19:08:07,819 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 19:08:07,819 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 19:08:07,820 - linkedin_bot - INFO - Token loaded successfully, access_token=AQXR4QUtY2xJJZIJrB8MfvN8h_N8AIPhOdrrUG6NOheTHD_tS6xL6PTzHNGfrIM2AcHAZFoNtN8LdDSSkJNqcgrdg116vftJlKBFVi1ntQXAfCyhywI8rYxCHMaabyTbcTHaBfXhEXe5Q39ZnVg0yYLx20N-yz5BV08eiH25LBsAhgZJ3rO8lRHj_222AcBHPJ2oT45nw2tQiiGK27y66xiFKFFklqTxUYqNGED_JOGezCQZu1RcN89Uvt4HkPRIlL6OynGljqQVns8HHiKAOAfAFYa_-POZPoULkUhL-zfyB_p_MUUvTrzs12fiaAJmELit11bFjOTAPdAOYg08163fSCr4yQ
+2025-03-03 19:08:07,820 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 19:08:07,820 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 19:08:08,488 - linkedin_bot - INFO - User profile loaded: {'sub': 'OzIxO6xzip', 'email_verified': True, 'name': 'Jonathan Pilatti', 'locale': {'country': 'US', 'language': 'en'}, 'given_name': 'Jonathan', 'family_name': 'Pilatti', 'email': 'jonypilatti@gmail.com', 'picture': 'https://media.licdn.com/dms/image/v2/D4D03AQGjUx3Ey6Fmjg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1693347011332?e=1746662400&v=beta&t=6WtS62t7Vbu77lG-RhzFyvURClKiYrt0hcEAhHABILw'}
+2025-03-03 19:09:00,106 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 19:09:00,106 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 19:09:00,106 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 19:09:00,107 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 19:09:00,107 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 19:09:00,107 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 19:09:00,108 - linkedin_bot - INFO - Token loaded successfully, access_token=AQXR4QUtY2xJJZIJrB8MfvN8h_N8AIPhOdrrUG6NOheTHD_tS6xL6PTzHNGfrIM2AcHAZFoNtN8LdDSSkJNqcgrdg116vftJlKBFVi1ntQXAfCyhywI8rYxCHMaabyTbcTHaBfXhEXe5Q39ZnVg0yYLx20N-yz5BV08eiH25LBsAhgZJ3rO8lRHj_222AcBHPJ2oT45nw2tQiiGK27y66xiFKFFklqTxUYqNGED_JOGezCQZu1RcN89Uvt4HkPRIlL6OynGljqQVns8HHiKAOAfAFYa_-POZPoULkUhL-zfyB_p_MUUvTrzs12fiaAJmELit11bFjOTAPdAOYg08163fSCr4yQ
+2025-03-03 19:09:00,108 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 19:09:00,108 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 19:09:00,725 - linkedin_bot - INFO - User profile loaded: {'sub': 'OzIxO6xzip', 'email_verified': True, 'name': 'Jonathan Pilatti', 'locale': {'country': 'US', 'language': 'en'}, 'given_name': 'Jonathan', 'family_name': 'Pilatti', 'email': 'jonypilatti@gmail.com', 'picture': 'https://media.licdn.com/dms/image/v2/D4D03AQGjUx3Ey6Fmjg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1693347011332?e=1746662400&v=beta&t=6WtS62t7Vbu77lG-RhzFyvURClKiYrt0hcEAhHABILw'}
+2025-03-03 19:09:14,469 - linkedin_bot - INFO - Filtering recruiter connections, excluding company=Stori
+2025-03-03 19:09:14,469 - linkedin_bot - INFO - Fetching user connections from LinkedIn.
+2025-03-03 19:09:14,940 - linkedin_bot - ERROR - API request failed: 404 - {"status":404,"code":"RESOURCE_NOT_FOUND","message":"No virtual resource found"}
+2025-03-03 19:12:18,767 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 19:12:18,768 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 19:12:18,769 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 19:12:18,769 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 19:12:18,769 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 19:12:18,769 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 19:12:18,770 - linkedin_bot - INFO - Token loaded successfully, access_token=AQXR4QUtY2xJJZIJrB8MfvN8h_N8AIPhOdrrUG6NOheTHD_tS6xL6PTzHNGfrIM2AcHAZFoNtN8LdDSSkJNqcgrdg116vftJlKBFVi1ntQXAfCyhywI8rYxCHMaabyTbcTHaBfXhEXe5Q39ZnVg0yYLx20N-yz5BV08eiH25LBsAhgZJ3rO8lRHj_222AcBHPJ2oT45nw2tQiiGK27y66xiFKFFklqTxUYqNGED_JOGezCQZu1RcN89Uvt4HkPRIlL6OynGljqQVns8HHiKAOAfAFYa_-POZPoULkUhL-zfyB_p_MUUvTrzs12fiaAJmELit11bFjOTAPdAOYg08163fSCr4yQ
+2025-03-03 19:12:18,770 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 19:12:18,771 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 19:12:19,338 - linkedin_bot - INFO - User profile loaded: {'sub': 'OzIxO6xzip', 'email_verified': True, 'name': 'Jonathan Pilatti', 'locale': {'country': 'US', 'language': 'en'}, 'given_name': 'Jonathan', 'family_name': 'Pilatti', 'email': 'jonypilatti@gmail.com', 'picture': 'https://media.licdn.com/dms/image/v2/D4D03AQGjUx3Ey6Fmjg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1693347011332?e=1746662400&v=beta&t=6WtS62t7Vbu77lG-RhzFyvURClKiYrt0hcEAhHABILw'}
+2025-03-03 19:12:28,358 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 19:12:28,358 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 19:12:28,359 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 19:12:28,359 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 19:12:28,360 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 19:12:28,360 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 19:12:28,361 - linkedin_bot - INFO - Token loaded successfully, access_token=AQXR4QUtY2xJJZIJrB8MfvN8h_N8AIPhOdrrUG6NOheTHD_tS6xL6PTzHNGfrIM2AcHAZFoNtN8LdDSSkJNqcgrdg116vftJlKBFVi1ntQXAfCyhywI8rYxCHMaabyTbcTHaBfXhEXe5Q39ZnVg0yYLx20N-yz5BV08eiH25LBsAhgZJ3rO8lRHj_222AcBHPJ2oT45nw2tQiiGK27y66xiFKFFklqTxUYqNGED_JOGezCQZu1RcN89Uvt4HkPRIlL6OynGljqQVns8HHiKAOAfAFYa_-POZPoULkUhL-zfyB_p_MUUvTrzs12fiaAJmELit11bFjOTAPdAOYg08163fSCr4yQ
+2025-03-03 19:12:28,361 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 19:12:28,361 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 19:12:28,867 - linkedin_bot - ERROR - API request failed: 403 - {"status":403,"serviceErrorCode":100,"code":"ACCESS_DENIED","message":"Not enough permissions to access: me.GET.NO_VERSION"}
+2025-03-03 19:12:28,867 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":403,"serviceErrorCode":100,"code":"ACCESS_DENIED","message":"Not enough permissions to access: me.GET.NO_VERSION"}', 'status': 'error'}
+2025-03-03 19:13:29,772 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 19:13:29,772 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 19:13:29,772 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 19:13:29,773 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 19:13:29,773 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 19:13:29,773 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 19:13:29,774 - linkedin_bot - INFO - Token loaded successfully, access_token=AQXR4QUtY2xJJZIJrB8MfvN8h_N8AIPhOdrrUG6NOheTHD_tS6xL6PTzHNGfrIM2AcHAZFoNtN8LdDSSkJNqcgrdg116vftJlKBFVi1ntQXAfCyhywI8rYxCHMaabyTbcTHaBfXhEXe5Q39ZnVg0yYLx20N-yz5BV08eiH25LBsAhgZJ3rO8lRHj_222AcBHPJ2oT45nw2tQiiGK27y66xiFKFFklqTxUYqNGED_JOGezCQZu1RcN89Uvt4HkPRIlL6OynGljqQVns8HHiKAOAfAFYa_-POZPoULkUhL-zfyB_p_MUUvTrzs12fiaAJmELit11bFjOTAPdAOYg08163fSCr4yQ
+2025-03-03 19:13:29,774 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 19:13:29,774 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 19:13:30,401 - linkedin_bot - INFO - User profile loaded: {'sub': 'OzIxO6xzip', 'email_verified': True, 'name': 'Jonathan Pilatti', 'locale': {'country': 'US', 'language': 'en'}, 'given_name': 'Jonathan', 'family_name': 'Pilatti', 'email': 'jonypilatti@gmail.com', 'picture': 'https://media.licdn.com/dms/image/v2/D4D03AQGjUx3Ey6Fmjg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1693347011332?e=1746662400&v=beta&t=6WtS62t7Vbu77lG-RhzFyvURClKiYrt0hcEAhHABILw'}
+2025-03-03 19:13:38,342 - linkedin_bot - INFO - Generating message using LMStudio with prompt_template=Hello from the test!, context={}
+2025-03-03 19:13:53,994 - linkedin_bot - INFO - Filtering recruiter connections, excluding company=Stori
+2025-03-03 19:13:53,994 - linkedin_bot - INFO - Fetching user connections from LinkedIn.
+2025-03-03 19:13:54,485 - linkedin_bot - ERROR - API request failed: 404 - {"status":404,"code":"RESOURCE_NOT_FOUND","message":"No virtual resource found"}
+2025-03-03 19:14:09,073 - linkedin_bot - INFO - Searching for jobs with keywords=['full stack', 'nextjs', 'python', 'fastapi', 'nodejs', 'expressjs'], location=, easy_apply_only=True
+2025-03-03 19:14:09,562 - linkedin_bot - ERROR - API request failed: 404 - {"status":404,"code":"RESOURCE_NOT_FOUND","message":"No virtual resource found"}
+2025-03-03 19:14:20,952 - linkedin_bot - INFO - Searching for jobs with keywords=['full stack', 'nextjs', 'python', 'fastapi', 'nodejs', 'expressjs'], location=, easy_apply_only=True
+2025-03-03 19:14:21,437 - linkedin_bot - ERROR - API request failed: 404 - {"status":404,"code":"RESOURCE_NOT_FOUND","message":"No virtual resource found"}
+2025-03-03 19:14:28,704 - linkedin_bot - INFO - Generating message using LMStudio with prompt_template=Hello from the test!, context={}
+2025-03-03 19:14:40,374 - linkedin_bot - INFO - Filtering recruiter connections, excluding company=Stori
+2025-03-03 19:14:40,375 - linkedin_bot - INFO - Fetching user connections from LinkedIn.
+2025-03-03 19:14:41,285 - linkedin_bot - ERROR - API request failed: 404 - {"status":404,"code":"RESOURCE_NOT_FOUND","message":"No virtual resource found"}
+2025-03-03 19:14:42,175 - linkedin_bot - INFO - Starting contact_recruiters with skills=NextJS/Python with FastAPI or NodeJS+ExpressJS
+2025-03-03 19:14:42,175 - linkedin_bot - INFO - Filtering recruiter connections, excluding company=Stori
+2025-03-03 19:14:42,175 - linkedin_bot - INFO - Fetching user connections from LinkedIn.
+2025-03-03 19:14:43,185 - linkedin_bot - ERROR - API request failed: 404 - {"status":404,"code":"RESOURCE_NOT_FOUND","message":"No virtual resource found"}
+2025-03-03 19:36:34,306 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 19:36:34,306 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 19:36:34,307 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 19:36:34,307 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 19:36:34,307 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 19:36:34,308 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 19:36:34,308 - linkedin_bot - INFO - Token loaded successfully, access_token=AQXR4QUtY2xJJZIJrB8MfvN8h_N8AIPhOdrrUG6NOheTHD_tS6xL6PTzHNGfrIM2AcHAZFoNtN8LdDSSkJNqcgrdg116vftJlKBFVi1ntQXAfCyhywI8rYxCHMaabyTbcTHaBfXhEXe5Q39ZnVg0yYLx20N-yz5BV08eiH25LBsAhgZJ3rO8lRHj_222AcBHPJ2oT45nw2tQiiGK27y66xiFKFFklqTxUYqNGED_JOGezCQZu1RcN89Uvt4HkPRIlL6OynGljqQVns8HHiKAOAfAFYa_-POZPoULkUhL-zfyB_p_MUUvTrzs12fiaAJmELit11bFjOTAPdAOYg08163fSCr4yQ
+2025-03-03 19:36:34,309 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 19:36:34,309 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 19:36:34,872 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65601,"code":"REVOKED_ACCESS_TOKEN","message":"The token used in the request has been revoked by the user"}
+2025-03-03 19:36:34,872 - linkedin_bot - INFO - User profile loaded: {'error': '{"status":401,"serviceErrorCode":65601,"code":"REVOKED_ACCESS_TOKEN","message":"The token used in the request has been revoked by the user"}', 'status': 'error'}
+2025-03-03 19:36:38,165 - linkedin_bot - INFO - Filtering recruiter connections, excluding company=Stori
+2025-03-03 19:36:38,165 - linkedin_bot - INFO - Fetching user connections from LinkedIn.
+2025-03-03 19:36:38,654 - linkedin_bot - ERROR - API request failed: 401 - {"status":401,"serviceErrorCode":65601,"code":"REVOKED_ACCESS_TOKEN","message":"The token used in the request has been revoked by the user"}
+2025-03-03 19:38:02,107 - linkedin_bot - INFO - Initializing LinkedInAPI with client_id=777y6nvyy3e4u0, redirect_uri=http://localhost:8000/callback
+2025-03-03 19:38:02,108 - linkedin_bot - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-03 19:38:02,109 - linkedin_bot - INFO - Initializing LinkedInBot...
+2025-03-03 19:38:02,109 - linkedin_bot - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-03 19:38:02,109 - linkedin_bot - INFO - No auth_code provided, attempting to load existing token.
+2025-03-03 19:38:02,109 - linkedin_bot - INFO - Attempting to load token from linkedin_token.json
+2025-03-03 19:38:02,110 - linkedin_bot - INFO - Token loaded successfully, access_token=AQXz_UOrxyxBs_nB6h5qaFcrri975w-AS70X2I1AW0zVBdLHw5cf3HO1B-KXjAfhrDaIwZYzkdHOaU_YfR8FeyrP5FeE3D1WymAKtLgfkdp9TEerHQ7Zc4v9iBS_gF3-7v7nberlWCUsANOcAln_5z2P4i0GpJcjKTHEekS1zFIJc9lNT_Sb5lSl65ndWByatu03aTNs84Hg5IWNytcXbGKFjuk70jZPHrmKljXsEMUNQ2iXC3qPn1tp7i4hkVaoCx4R2tNDXQxEqNLMIOOp4dNKWuEpCAffZn5jTwb_w6xkWKk931-7Q9wqAOXvhjxYH3t1dy3VcrfjBeNlr5_NhafGeqTHAw
+2025-03-03 19:38:02,110 - linkedin_bot - INFO - Successfully authenticated with LinkedIn, fetching user profile...
+2025-03-03 19:38:02,111 - linkedin_bot - INFO - Fetching current user profile from LinkedIn.
+2025-03-03 19:38:02,702 - linkedin_bot - INFO - User profile loaded: {'sub': 'OzIxO6xzip', 'email_verified': True, 'name': 'Jonathan Pilatti', 'locale': {'country': 'US', 'language': 'en'}, 'given_name': 'Jonathan', 'family_name': 'Pilatti', 'email': 'jonypilatti@gmail.com', 'picture': 'https://media.licdn.com/dms/image/v2/D4D03AQGjUx3Ey6Fmjg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1693347011332?e=1746662400&v=beta&t=6WtS62t7Vbu77lG-RhzFyvURClKiYrt0hcEAhHABILw'}
+2025-03-03 19:38:05,038 - linkedin_bot - INFO - Filtering recruiter connections, excluding company=Stori
+2025-03-03 19:38:05,039 - linkedin_bot - INFO - Fetching user connections from LinkedIn.
+2025-03-03 19:38:05,526 - linkedin_bot - ERROR - API request failed: 404 - {"status":404,"code":"RESOURCE_NOT_FOUND","message":"No virtual resource found"}
