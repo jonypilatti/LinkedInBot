@@ -1,106 +1,54 @@
-# LinkedIn Job Search Bot
+# LinkedIn Job Search Bot (Automatización Web)
 
-Este bot automatiza la búsqueda de empleo en LinkedIn con ayuda de **inteligencia artificial**, permitiendo contactar reclutadores y aplicar a trabajos de manera automatizada. Ahora cuenta con una **interfaz gráfica moderna**, almacenamiento de historial y mejoras en la compatibilidad con Docker.
+Este bot automatiza la búsqueda de empleo en LinkedIn utilizando **automatización web con Selenium**, permitiendo: ✅ **Iniciar sesión automáticamente** en LinkedIn.  
+✅ **Buscar empleos filtrando por _Easy Apply_**.  
+✅ **Aplicar automáticamente** a trabajos con Easy Apply.  
+✅ **Enviar mensajes automáticos a reclutadores**.  
+✅ **Mantener un historial de acciones en SQLite**.
 
 ## 🛠 Tecnologías Utilizadas
 
-- **python3-linkedin**: Cliente de LinkedIn para autenticación y manejo de perfiles.
-- **requests**: Para llamadas REST a la API de LinkedIn.
-- **tkinter + ttkbootstrap**: Interfaz gráfica con logs en vivo y diseño moderno.
-- **pytest y unittest**: Para pruebas unitarias.
-- **LM Studio**: IA generativa para mensajes y cover letters.
-- **backoff**: Manejo de reintentos automáticos en LinkedIn.
-- **SQLite**: Base de datos para almacenar historial de interacciones.
-- **Docker y Docker Compose**: Para ejecutar el bot en un entorno aislado.
-
-## 🚀 Características
-
-✅ **Interfaz gráfica (GUI) con logs en vivo y diseño oscuro.**  
-✅ **Autenticación con LinkedIn y reuso de tokens.**  
-✅ **Mensajería automática a reclutadores con IA.**  
-✅ **Búsqueda de empleos y aplicación automática.**  
-✅ **Historial de mensajes y postulaciones en SQLite.**  
-✅ **Exportación de resultados a CSV.**  
-✅ **Compatibilidad con Docker.**
+- **Selenium + Undetected ChromeDriver**: Automatización web sin ser detectado.
+- **Tkinter + ttkbootstrap (futuro agregado)**: Para una interfaz gráfica moderna.
+- **SQLite**: Para almacenar historial de postulaciones.
+- **WebDriver Manager**: Para manejar la versión correcta de ChromeDriver.
 
 ## 📂 Estructura del Proyecto
 
 ```
 linkedin-bot/
+├─ bot.py                   # Lógica principal del bot (Selenium)
+├─ gui.py                   # Interfaz gráfica (por implementar)
 ├─ client_interface.py       # Punto de entrada principal
-├─ linkedin_api.py          # Autenticación y API de LinkedIn
-├─ lm_studio.py             # Generación de mensajes con IA
-├─ bot.py                   # Lógica principal del bot
-├─ gui.py                   # Interfaz gráfica con logs
-├─ config.json              # Configuración de credenciales
 ├─ requirements.txt         # Dependencias del proyecto
-├─ Dockerfile               # Configuración del contenedor
-├─ docker-compose.yml       # Orquestación de contenedores
-├─ history.db               # Base de datos SQLite (opcional)
-└─ README.md                # Documentación del proyecto
+├─ README.md                # Documentación del proyecto
+└─ history.db               # Base de datos SQLite (opcional)
 ```
 
-## 🔧 Configuración
+## 🔧 Instalación y Configuración
 
-### 1️⃣ Crear una aplicación en LinkedIn Developer Portal
-
-1. Ir a [LinkedIn Developer Portal](https://www.linkedin.com/developers/).
-2. Crear una aplicación y obtener `client_id` y `client_secret`.
-3. Configurar `redirect_uri` como `http://localhost:8000/callback`.
-
-### 2️⃣ Configurar `config.json`
-
-```json
-{
-  "linkedin": {
-    "client_id": "TU_CLIENT_ID",
-    "client_secret": "TU_CLIENT_SECRET",
-    "redirect_uri": "http://localhost:8000/callback"
-  },
-  "lm_studio": {
-    "api_url": "http://localhost:1234/v1"
-  }
-}
-```
-
-### 3️⃣ Instalar dependencias
+### 1️⃣ Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4️⃣ Ejecutar el bot
+### 2️⃣ Ejecutar el bot
 
 ```bash
-python client_interface.py
+python bot.py
 ```
 
-## 🐳 Uso con Docker
+⚠️ **Antes de ejecutar, edita `bot.py` y coloca tu usuario y contraseña de LinkedIn**:
 
-### 1️⃣ Construir y ejecutar el contenedor
-
-```bash
-docker-compose up --build
+```python
+bot = LinkedInBot(email="tu_email", password="tu_contraseña")
 ```
 
-### 2️⃣ Ejecutar pruebas dentro del contenedor
+## 🐳 Uso con Docker (próximamente)
 
-```bash
-docker-compose run test
-```
+🚀 **¿Qué sigue?**
 
-### 3️⃣ Acceder al historial de SQLite
-
-```bash
-docker exec -it linkedin-db sqlite3 /var/lib/sqlite3/history.db
-```
-
-## 📌 Notas Adicionales
-
-- **Token de Acceso**: Si el token expira, el bot permite reautenticarse sin reiniciar la aplicación.
-- **Historial en SQLite**: Registra acciones en `history.db`.
-- **Internacionalización (i18n)**: La interfaz puede traducirse a otros idiomas en futuras actualizaciones.
-
----
-
-🔗 **Para más información, revisa la [documentación de LinkedIn API](https://docs.microsoft.com/en-us/linkedin/).**
+- **Agregar una GUI interactiva** para ver logs en tiempo real.
+- **Optimizar la detección de trabajos relevantes con IA**.
+- **Soporte para manejo de captchas si LinkedIn los detecta**.

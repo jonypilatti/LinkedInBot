@@ -4,3 +4,5 @@ linkedin_bot.log
 linkedin_bot_client.log
 .pytest_cache
 __pycache__
+config.json
+linkedin_token.json
