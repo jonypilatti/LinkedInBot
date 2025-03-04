@@ -1,158 +1,244 @@
 """
-LinkedIn Bot Client Interface
-----------------------------
-A simple interface to interact with the LinkedIn Job Search Bot
+LinkedIn Job Search Bot with LM Studio Integration (Refactored)
+---------------------------------------------------------------
+This refactored version replaces direct requests calls with the python3-linkedin library,
+reducing manual handling of OAuth tokens. It also removes the custom _make_request method
+in favor of library calls wherever possible.
 """
-
-import sys
+import os
 import json
+import time
 import logging
-import threading
-import tkinter as tk
-from tkinter import ttk, scrolledtext, messagebox, simpledialog
-from typing import Dict, List, Any
-from datetime import datetime
 import requests
-# Import the updated bot classes (with error handling and token management)
-from linkedin_bot import LinkedInAPI, LMStudioInterface, LinkedInBot
+from typing import List, Dict
 
-# Configure logging
+from linkedin import linkedin  # python3-linkedin
+
+# Configuración básica de logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("linkedin_bot_client.log"),
+        logging.FileHandler("linkedin_bot.log"),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
 
 
-class LinkedInBotGUI:
-    """GUI for the LinkedIn Job Search Bot"""
-    
-    def __init__(self, root):
-        """Initialize the GUI"""
-        self.root = root
-        self.root.title("LinkedIn Job Search Bot")
-        self.root.geometry("800x600")
-        self.root.minsize(800, 600)
-        
-        self.bot = None
-        self.is_bot_initialized = False
-        
-        # Configuration frame
-        self.create_config_frame()
-        
-        # Main functionality tabs
-        self.create_tabs()
-        
-        # Status bar
-        self.status_var = tk.StringVar()
-        self.status_var.set("Ready")
-        status_bar = ttk.Label(
-            self.root, 
-            textvariable=self.status_var, 
-            relief=tk.SUNKEN, 
-            anchor=tk.W
+class LinkedInAPI:
+    """Interface para interacciones con la API de LinkedIn usando exclusivamente el cliente python3‑linkedin para OAuth y REST para funcionalidades no soportadas."""
+
+    def __init__(self, client_id: str, client_secret: str, redirect_uri: str):
+        logger.info("Inicializando LinkedInAPI con client_id=%s, redirect_uri=%s", client_id, redirect_uri)
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.redirect_uri = redirect_uri
+
+        # Permisos requeridos
+        self.permissions = ['r_liteprofile', 'r_emailaddress', 'w_member_social']
+        self.authentication = linkedin.LinkedInAuthentication(
+            self.client_id,
+            self.client_secret,
+            self.redirect_uri,
+            self.permissions
         )
-        status_bar.pack(side=tk.BOTTOM, fill=tk.X)
-        
-        # Load saved configuration
-        self.load_config()
-    
-    def create_config_frame(self):
-        """Create configuration frame"""
-        config_frame = ttk.LabelFrame(self.root, text="LinkedIn & LM Studio Configuration")
-        config_frame.pack(fill=tk.X, padx=10, pady=10)
-        
-        # LinkedIn API credentials
-        ttk.Label(config_frame, text="LinkedIn Client ID:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
-        self.client_id_var = tk.StringVar()
-        ttk.Entry(config_frame, textvariable=self.client_id_var, width=30).grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
-        
-        ttk.Label(config_frame, text="LinkedIn Client Secret:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
-        self.client_secret_var = tk.StringVar()
-        ttk.Entry(config_frame, textvariable=self.client_secret_var, width=30, show="*").grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
-        
-        ttk.Label(config_frame, text="Redirect URI:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
-        self.redirect_uri_var = tk.StringVar(value="http://localhost:8000/callback")
-        ttk.Entry(config_frame, textvariable=self.redirect_uri_var, width=30).grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
-        
-        # LM Studio configuration
-        ttk.Label(config_frame, text="LM Studio API URL:").grid(row=0, column=2, padx=5, pady=5, sticky=tk.W)
-        self.lm_studio_url_var = tk.StringVar(value="http://localhost:1234/v1")
-        ttk.Entry(config_frame, textvariable=self.lm_studio_url_var, width=30).grid(row=0, column=3, padx=5, pady=5, sticky=tk.W)
-        
-        # Current company (to exclude)
-        ttk.Label(config_frame, text="Your Current Company:").grid(row=1, column=2, padx=5, pady=5, sticky=tk.W)
-        self.current_company_var = tk.StringVar(value="Stori")
-        ttk.Entry(config_frame, textvariable=self.current_company_var, width=30).grid(row=1, column=3, padx=5, pady=5, sticky=tk.W)
-        
-        # Skills
-        ttk.Label(config_frame, text="Your Skills:").grid(row=2, column=2, padx=5, pady=5, sticky=tk.W)
-        self.skills_var = tk.StringVar(value="NextJS/Python with FastAPI or NodeJS+ExpressJS")
-        ttk.Entry(config_frame, textvariable=self.skills_var, width=30).grid(row=2, column=3, padx=5, pady=5, sticky=tk.W)
-        
-        # Buttons
-        buttons_frame = ttk.Frame(config_frame)
-        buttons_frame.grid(row=3, column=0, columnspan=4, pady=10)
-        
-        ttk.Button(buttons_frame, text="Initialize Bot", command=self.initialize_bot).pack(side=tk.LEFT, padx=5)
-        ttk.Button(buttons_frame, text="Save Config", command=self.save_config).pack(side=tk.LEFT, padx=5)
-        ttk.Button(buttons_frame, text="Test LM Studio", command=self.test_lm_studio).pack(side=tk.LEFT, padx=5)
-        ttk.Button(buttons_frame, text="Authenticate LinkedIn", command=self.authenticate_linkedin).pack(side=tk.LEFT, padx=5)
-    
-    def create_tabs(self):
-        """Create main functionality tabs"""
-        self.tab_control = ttk.Notebook(self.root)
-        
-        # Contact recruiters tab
-        self.recruiter_tab = ttk.Frame(self.tab_control)
-        self.tab_control.add(self.recruiter_tab, text="Contact Recruiters")
-        self.setup_recruiter_tab()
-        
-        # Job application tab
-        self.job_tab = ttk.Frame(self.tab_control)
-        self.tab_control.add(self.job_tab, text="Apply to Jobs")
-        self.setup_job_tab()
-        
-        # Chat tab
-        self.chat_tab = ttk.Frame(self.tab_control)
-        self.tab_control.add(self.chat_tab, text="Chat with Assistant")
-        self.setup_chat_tab()
-        
-        # Log tab
-        self.log_tab = ttk.Frame(self.tab_control)
-        self.tab_control.add(self.log_tab, text="Logs")
-        self.setup_log_tab()
-        
-        self.tab_control.pack(expand=1, fill=tk.BOTH, padx=10, pady=10)
-    
-    def setup_recruiter_tab(self):
-        """Setup recruiter contact tab"""
-        frame = ttk.Frame(self.recruiter_tab, padding="10")
-        frame.pack(fill=tk.BOTH, expand=True)
-        
-        # Options
-        options_frame = ttk.LabelFrame(frame, text="Options")
-        options_frame.pack(fill=tk.X, pady=5)
-        
-        ttk.Label(options_frame, text="Maximum recruiters to contact:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
-        self.max_recruiters_var = tk.IntVar(value=10)
-        ttk.Spinbox(options_frame, from_=1, to=100, textvariable=self.max_recruiters_var, width=5).grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
-        
-        ttk.Label(options_frame, text="Delay between messages (seconds):").grid(row=0, column=2, padx=5, pady=5, sticky=tk.W)
-        self.message_delay_var = tk.IntVar(value=5)
-        ttk.Spinbox(options_frame, from_=1, to=60, textvariable=self.message_delay_var, width=5).grid(row=0, column=3, padx=5, pady=5, sticky=tk.W)
-        
-        # Message template
-        template_frame = ttk.LabelFrame(frame, text="Message Template")
-        template_frame.pack(fill=tk.BOTH, expand=True, pady=5)
-        
-        self.message_template_text = scrolledtext.ScrolledText(template_frame, height=10)
-        self.message_template_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-        self.message_template_text.insert(tk.END, """Hello {recruiter_name},
+
+        self.access_token = None
+        self.application = None  # Se utiliza para llamadas soportadas por el cliente.
+        self.base_url = "https://api.linkedin.com/v2"  # Base URL para llamadas REST manuales.
+
+    def authenticate(self, auth_code: str = None) -> bool:
+        if auth_code:
+            logger.info("Autenticando con LinkedIn usando auth_code=%s", auth_code)
+            try:
+                self.authentication.authorization_code = auth_code
+                token = self.authentication.get_access_token()
+                self.access_token = token.access_token
+                expires_in = token.expires_in  # en segundos
+                expires_at = time.time() + expires_in
+                token_data = {"access_token": self.access_token, "expires_at": expires_at}
+                self._save_token(token_data)
+                self.application = linkedin.LinkedInApplication(token=self.access_token)
+                return True
+            except Exception as e:
+                logger.error("Fallo en la autenticación: %s", e)
+                return False
+        else:
+            logger.info("No se proporcionó auth_code, intentando cargar token existente.")
+            if self._load_token() and self.access_token:
+                self.application = linkedin.LinkedInApplication(token=self.access_token)
+                return True
+            else:
+                logger.warning("No se pudo cargar el token o ha expirado.")
+                return False
+
+    def _save_token(self, token_data: Dict) -> None:
+        logger.info("Guardando token en linkedin_token.json")
+        with open("linkedin_token.json", "w") as f:
+            json.dump(token_data, f)
+
+    def _load_token(self) -> bool:
+        try:
+            with open("linkedin_token.json", "r") as f:
+                token_data = json.load(f)
+                self.access_token = token_data.get("access_token")
+                expires_at = token_data.get("expires_at", 0)
+                if time.time() > expires_at:
+                    logger.warning("El token de acceso ha expirado.")
+                    return False
+                logger.info("Token cargado exitosamente, access_token=%s", self.access_token)
+                return True
+        except Exception as e:
+            logger.error("Error al cargar token: %s", e)
+            return False
+
+    def get_current_user_profile(self) -> Dict:
+        try:
+            # Se usa el método del cliente para obtener el perfil
+            profile = self.application.get_profile(selectors=['id', 'first-name', 'last-name', 'email-address'])
+            logger.info("Perfil de usuario obtenido: %s", profile)
+            return profile
+        except Exception as e:
+            logger.error("Error al obtener el perfil: %s", e)
+            return {"error": str(e), "status": "error"}
+
+    def get_user_connections(self) -> List[Dict]:
+        try:
+            connections = self.application.get_connections()
+            logger.info("Conexiones obtenidas: %s", connections)
+            return connections
+        except Exception as e:
+            logger.error("Error al obtener conexiones: %s", e)
+            return []
+
+    def send_message(self, recipient_id: str, message: str) -> bool:
+        try:
+            # Se asume que el método send_message está disponible en el cliente python3‑linkedin.
+            response = self.application.send_message(recipients=[recipient_id], message=message)
+            logger.info("Mensaje enviado exitosamente: %s", response)
+            return True
+        except Exception as e:
+            logger.error("Error al enviar mensaje: %s", e)
+            return False
+
+    def search_jobs(self, keywords: List[str], location: str = "", easy_apply_only: bool = True) -> List[Dict]:
+        """
+        Función para buscar empleos usando una llamada REST al endpoint de búsqueda de empleos.
+        NOTA: Este endpoint puede requerir permisos especiales y está sujeto a cambios en la API de LinkedIn.
+        """
+        logger.info("Buscando empleos con keywords=%s, location=%s, easy_apply_only=%s", keywords, location, easy_apply_only)
+        url = f"{self.base_url}/job-search"
+        params = {
+            "keywords": ",".join(keywords),
+            "location": location,
+            "easy_apply": str(easy_apply_only).lower()
+        }
+        headers = {
+            "Authorization": f"Bearer {self.access_token}",
+            "Content-Type": "application/json"
+        }
+        try:
+            resp = requests.get(url, headers=headers, params=params, timeout=10)
+            if resp.status_code == 200:
+                jobs = resp.json().get("elements", [])
+                logger.info("Empleos encontrados: %d", len(jobs))
+                return jobs
+            else:
+                logger.error("Error en búsqueda de empleos: %d - %s", resp.status_code, resp.text)
+                return []
+        except Exception as e:
+            logger.error("Excepción en búsqueda de empleos: %s", e)
+            return []
+
+    def apply_to_job(self, job_id: str, resume_id: str = None) -> bool:
+        """
+        Función para aplicar a un empleo usando una llamada REST.
+        NOTA: Este endpoint puede requerir permisos especiales (Talent Solutions) y no estar disponible para todas las aplicaciones.
+        """
+        logger.info("Aplicando a empleo con job_id=%s, resume_id=%s", job_id, resume_id)
+        url = f"{self.base_url}/jobs/{job_id}/applications"
+        headers = {
+            "Authorization": f"Bearer {self.access_token}",
+            "Content-Type": "application/json"
+        }
+        data = {}
+        if resume_id:
+            data["resume"] = {"id": resume_id}
+        try:
+            resp = requests.post(url, headers=headers, json=data, timeout=10)
+            if 200 <= resp.status_code < 300:
+                logger.info("Aplicación enviada exitosamente.")
+                return True
+            else:
+                logger.error("Fallo al aplicar al empleo: %d - %s", resp.status_code, resp.text)
+                return False
+        except Exception as e:
+            logger.error("Excepción al aplicar al empleo: %s", e)
+            return False
+
+class LMStudioInterface:
+    """Interface for LM Studio with QWEN (or other) model"""
+
+    def __init__(self, api_url: str = "http://localhost:1234/v1"):
+        """Initialize LM Studio interface"""
+        logger.info("Initializing LMStudioInterface with api_url=%s", api_url)
+        self.api_url = api_url
+        self.model = "qwen2.5-7b-instruct-1m"  # Example or your actual QWEN model
+
+    def generate_message(self, prompt_template: str, context: Dict) -> str:
+        """
+        Generate a message using LM Studio.
+        Fill prompt_template with context, then POST to the LM Studio chat/completions endpoint.
+        """
+        logger.info("Generating message using LMStudio with prompt_template=%s, context=%s", prompt_template, context)
+        prompt = self._fill_template(prompt_template, context)
+
+        endpoint = f"{self.api_url}/chat/completions"
+        data = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": "You are a professional job seeking assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.7,
+            "max_tokens": 500
+        }
+
+        try:
+            response = requests.post(endpoint, json=data, timeout=30)
+            if response.status_code == 200:
+                result = response.json()
+                return result["choices"][0]["message"]["content"]
+            else:
+                logger.error("LM Studio request failed: %s - %s", response.status_code, response.text)
+                return ""
+        except Exception as e:
+            logger.error("Error calling LM Studio: %s", e)
+            return ""
+
+    def _fill_template(self, template: str, context: Dict) -> str:
+        """Fill template placeholders with the given context keys."""
+        for key, value in context.items():
+            template = template.replace(f"{{{key}}}", str(value))
+        return template
+
+
+class LinkedInBot:
+    """
+    Main bot class that coordinates LinkedIn API and LM Studio
+    for contacting recruiters and applying to jobs.
+    """
+
+    def __init__(self, linkedin_api: LinkedInAPI, lm_studio: LMStudioInterface):
+        logger.info("Initializing LinkedInBot...")
+        self.linkedin = linkedin_api
+        self.lm_studio = lm_studio
+        self.user_profile = None
+
+        # Template for contacting recruiters
+        self.recruiter_message_template = """
+Hello {recruiter_name},
 
 I noticed you're a {recruiter_title} at {recruiter_company}. I'm currently exploring new opportunities as a Full Stack Engineer with expertise in {skills}.
 
@@ -161,360 +247,134 @@ I noticed you're a {recruiter_title} at {recruiter_company}. I'm currently explo
 I'd appreciate the opportunity to discuss how my skills might align with roles you're currently hiring for.
 
 Best regards,
-{user_name}""")
-        
-        # Buttons
-        button_frame = ttk.Frame(frame)
-        button_frame.pack(fill=tk.X, pady=5)
-        
-        ttk.Button(button_frame, text="Find Recruiters", command=self.find_recruiters).pack(side=tk.LEFT, padx=5)
-        ttk.Button(button_frame, text="Start Contacting", command=self.start_contacting_recruiters).pack(side=tk.LEFT, padx=5)
-        ttk.Button(button_frame, text="Stop", command=self.stop_operation).pack(side=tk.LEFT, padx=5)
-        
-        # Results
-        results_frame = ttk.LabelFrame(frame, text="Results")
-        results_frame.pack(fill=tk.BOTH, expand=True, pady=5)
-        
-        self.recruiter_results_text = scrolledtext.ScrolledText(results_frame, height=10)
-        self.recruiter_results_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-    
-    def setup_job_tab(self):
-        """Setup job application tab"""
-        frame = ttk.Frame(self.job_tab, padding="10")
-        frame.pack(fill=tk.BOTH, expand=True)
-        
-        # Search options
-        search_frame = ttk.LabelFrame(frame, text="Job Search Options")
-        search_frame.pack(fill=tk.X, pady=5)
-        
-        ttk.Label(search_frame, text="Keywords (comma separated):").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
-        self.keywords_var = tk.StringVar(value="full stack, nextjs, python, fastapi, nodejs, expressjs")
-        ttk.Entry(search_frame, textvariable=self.keywords_var, width=40).grid(row=0, column=1, padx=5, pady=5, sticky=tk.W+tk.E)
-        
-        ttk.Label(search_frame, text="Location:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
-        self.location_var = tk.StringVar()
-        ttk.Entry(search_frame, textvariable=self.location_var, width=40).grid(row=1, column=1, padx=5, pady=5, sticky=tk.W+tk.E)
-        
-        ttk.Label(search_frame, text="Maximum jobs to apply:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
-        self.max_jobs_var = tk.IntVar(value=20)
-        ttk.Spinbox(search_frame, from_=1, to=100, textvariable=self.max_jobs_var, width=5).grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
-        
-        # Easy Apply Only checkbox
-        self.easy_apply_only_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(search_frame, text="Easy Apply Only", variable=self.easy_apply_only_var).grid(row=3, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W)
-        
-        # Buttons
-        button_frame = ttk.Frame(frame)
-        button_frame.pack(fill=tk.X, pady=5)
-        
-        ttk.Button(button_frame, text="Search Jobs", command=self.search_jobs).pack(side=tk.LEFT, padx=5)
-        ttk.Button(button_frame, text="Start Applying", command=self.start_applying_jobs).pack(side=tk.LEFT, padx=5)
-        ttk.Button(button_frame, text="Stop", command=self.stop_operation).pack(side=tk.LEFT, padx=5)
-        
-        # Results
-        results_frame = ttk.LabelFrame(frame, text="Results")
-        results_frame.pack(fill=tk.BOTH, expand=True, pady=5)
-        
-        self.job_results_text = scrolledtext.ScrolledText(results_frame, height=10)
-        self.job_results_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-    
-    def setup_chat_tab(self):
-        """Setup chat tab (AI assistant interface)"""
-        frame = ttk.Frame(self.chat_tab, padding="10")
-        frame.pack(fill=tk.BOTH, expand=True)
-        
-        # Chat history
-        self.chat_history = scrolledtext.ScrolledText(frame, state=tk.DISABLED, height=15)
-        self.chat_history.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-        
-        # Input
-        input_frame = ttk.Frame(frame)
-        input_frame.pack(fill=tk.X, pady=5)
-        
-        self.chat_input = tk.StringVar()
-        entry = ttk.Entry(input_frame, textvariable=self.chat_input, width=60)
-        entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
-        
-        ttk.Button(input_frame, text="Send", command=self.send_chat_message).pack(side=tk.LEFT, padx=5)
-    
-    def setup_log_tab(self):
-        """Setup log tab to view the logs"""
-        frame = ttk.Frame(self.log_tab, padding="10")
-        frame.pack(fill=tk.BOTH, expand=True)
-        
-        # Auto-refresh check
-        self.auto_refresh_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(frame, text="Auto Refresh Logs", variable=self.auto_refresh_var).pack(anchor=tk.W)
-        
-        # Log text
-        self.log_text = scrolledtext.ScrolledText(frame, state=tk.DISABLED, height=15)
-        self.log_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-        
-        # Manual refresh button
-        ttk.Button(frame, text="Refresh Logs", command=self.load_logs).pack(pady=5)
-    
-    def load_config(self):
-        """Load previously saved config from config.json (if any)"""
-        try:
-            with open("config.json", "r") as f:
-                cfg = json.load(f)
-                self.client_id_var.set(cfg["linkedin"]["client_id"])
-                self.client_secret_var.set(cfg["linkedin"]["client_secret"])
-                self.redirect_uri_var.set(cfg["linkedin"]["redirect_uri"])
-                self.lm_studio_url_var.set(cfg["lm_studio"]["api_url"])
-                self.current_company_var.set(cfg["options"]["current_company"])
-                self.skills_var.set(cfg["options"]["skills"])
-        except Exception as e:
-            logger.warning(f"No config loaded or invalid. Reason: {e}")
-    
-    def save_config(self):
-        """Save current config to config.json"""
-        cfg = {
-            "linkedin": {
-                "client_id": self.client_id_var.get(),
-                "client_secret": self.client_secret_var.get(),
-                "redirect_uri": self.redirect_uri_var.get()
-            },
-            "lm_studio": {
-                "api_url": self.lm_studio_url_var.get()
-            },
-            "options": {
-                "current_company": self.current_company_var.get(),
-                "skills": self.skills_var.get()
-            }
+{user_name}
+        """
+
+        # Initialize and authenticate if a saved token exists
+        self._initialize()
+
+    def _initialize(self) -> None:
+        """Attempt to load an existing token and fetch user profile."""
+        logger.info("Attempting LinkedIn authentication in LinkedInBot._initialize()...")
+        if self.linkedin.authenticate():
+            logger.info("Successfully authenticated with LinkedIn, fetching user profile...")
+            self.user_profile = self.linkedin.get_current_user_profile()
+            logger.info("User profile loaded: %s", self.user_profile)
+        else:
+            logger.error("Failed to authenticate with LinkedIn. Provide a new code or check config.")
+
+    def contact_recruiters(self, skills: str = "NextJS/Python with FastAPI or NodeJS+ExpressJS") -> Dict:
+        """Contact recruiters in your connections."""
+        logger.info("Starting contact_recruiters with skills=%s", skills)
+        results = {
+            "success": 0,
+            "failed": 0,
+            "skipped": 0,
+            "details": []
         }
-        with open("config.json", "w") as f:
-            json.dump(cfg, f, indent=2)
-        self.update_status("Configuration saved.")
-    
-    def initialize_bot(self):
-        """Create instances of the LinkedInAPI, LMStudioInterface, and LinkedInBot"""
-        self.linkedin_api = LinkedInAPI(
-            client_id=self.client_id_var.get(),
-            client_secret=self.client_secret_var.get(),
-            redirect_uri=self.redirect_uri_var.get()
-        )
-        self.lm_studio = LMStudioInterface(
-            api_url=self.lm_studio_url_var.get()
-        )
-        self.bot = LinkedInBot(self.linkedin_api, self.lm_studio)
-        
-        self.is_bot_initialized = True
-        self.update_status("Bot initialized. You can now authenticate or perform actions.")
-    
-    def authenticate_linkedin(self):
-        """Prompt for an auth code and authenticate with LinkedIn"""
-        if not self.is_bot_initialized or not self.bot:
-            messagebox.showerror("Error", "Please initialize the bot first.")
-            return
-        
-        auth_code = simpledialog.askstring("LinkedIn Auth", "Enter the Auth code from LinkedIn:")
-        if auth_code:
-            success = self.bot.linkedin.authenticate(auth_code)
+
+        recruiters = self.linkedin.filter_recruiter_connections(exclude_company="Stori")
+        logger.info("Found %d potential recruiter connections", len(recruiters))
+
+        # Attempt to get user name from profile
+        user_first = self.user_profile.get('firstName', '') if isinstance(self.user_profile, dict) else ''
+        user_last = self.user_profile.get('lastName', '') if isinstance(self.user_profile, dict) else ''
+
+        for recruiter in recruiters:
+            # Prepare context
+            recruiter_first = recruiter.get("firstName", "")
+            recruiter_title = recruiter.get("title", "Recruiter")
+            recruiter_company = recruiter.get("company", {}).get("name", "your company")
+
+            context = {
+                "recruiter_name": recruiter_first,
+                "recruiter_title": recruiter_title,
+                "recruiter_company": recruiter_company,
+                "skills": skills,
+                "user_name": f"{user_first} {user_last}"
+            }
+
+            # Generate a short personalized note
+            personalization_prompt = (
+                f"Generate a brief, professional, personalized note for a recruiter named {recruiter_first} "
+                f"who works at {recruiter_company} as a {recruiter_title}. "
+                f"The note should be 1-2 sentences explaining why I'm interested in potential opportunities."
+            )
+            logger.debug("Generating personalized note for recruiter=%s", recruiter_first)
+            personalized_note = self.lm_studio.generate_message(personalization_prompt, {})
+            context["personalized_note"] = personalized_note.strip()
+
+            # Fill the recruiter message template
+            message = self._fill_template(self.recruiter_message_template, context)
+
+            # Send
+            recruiter_id = recruiter.get("id", "")
+            if not recruiter_id:
+                logger.warning("No recruiter_id found, skipping.")
+                results["skipped"] += 1
+                continue
+
+            logger.info("Sending message to recruiter=%s at company=%s", recruiter_first, recruiter_company)
+            success = self.linkedin.send_message(recruiter_id, message)
+            result = {
+                "recruiter": f"{recruiter_first} {recruiter.get('lastName', '')}",
+                "company": recruiter_company,
+                "message": message,
+                "success": success
+            }
             if success:
-                self.update_status("LinkedIn authenticated successfully!")
+                results["success"] += 1
             else:
-                self.update_status("Failed to authenticate LinkedIn.")
-        else:
-            self.update_status("No auth code provided.")
-    
-    def test_lm_studio(self):
-        """Quick check to see if LM Studio can respond"""
-        if not self.is_bot_initialized or not self.bot:
-            messagebox.showerror("Error", "Please initialize the bot first.")
-            return
-        # Just ask a dummy prompt
-        response = self.bot.lm_studio.generate_message("Hello from the test!", {})
-        if response:
-            self.update_status("LM Studio responded successfully.")
-        else:
-            self.update_status("LM Studio did not respond. Check console for errors.")
-    
-    def find_recruiters(self):
-        """Find recruiter connections (simply logs the result)"""
-        if not self.check_bot_initialized_and_authenticated():
-            return
-        
-        # Filter by user-specified company
-        recruiters = self.bot.linkedin.filter_recruiter_connections(
-            exclude_company=self.current_company_var.get()
-        )
-        self.update_recruiter_results(f"Found {len(recruiters)} recruiters.\n")
-    
-    def start_contacting_recruiters(self):
-        """Contact recruiters with user-defined template"""
-        if not self.check_bot_initialized_and_authenticated():
-            return
-        
-        # We can run this in a thread so it doesn't block the GUI
-        def worker():
-            max_recruiters = self.max_recruiters_var.get()
-            delay = self.message_delay_var.get()
-            
-            # Overwrite the default template with the user's custom text
-            self.bot.recruiter_message_template = self.message_template_text.get("1.0", tk.END)
-            
-            results = self.bot.contact_recruiters(skills=self.skills_var.get())
-            
-            # Log summary
-            msg = f"Contacted {results['success']} recruiters, failed {results['failed']}."
-            self.update_recruiter_results(msg + "\n")
-            self.update_status("Finished contacting recruiters.")
-        
-        t = threading.Thread(target=worker)
-        t.start()
-    
-    def stop_operation(self):
-        """Stub to allow user to stop any running operation (not fully implemented)"""
-        self.update_status("Stop is not fully implemented yet.")
-    
-    def search_jobs(self):
-        """Search for jobs based on user input"""
-        if not self.check_bot_initialized_and_authenticated():
-            return
-        
-        keywords = [kw.strip() for kw in self.keywords_var.get().split(",")]
-        location = self.location_var.get()
-        easy_apply = self.easy_apply_only_var.get()
-        
-        jobs = self.bot.linkedin.search_jobs(keywords, location, easy_apply_only=easy_apply)
-        self.update_job_results(f"Found {len(jobs)} jobs.\n")
-    
-    def start_applying_jobs(self):
-        """Apply to Easy Apply jobs automatically"""
-        if not self.check_bot_initialized_and_authenticated():
-            return
-        
-        # We can run this in a thread so it doesn't block the GUI
-        def worker():
-            keywords = [kw.strip() for kw in self.keywords_var.get().split(",")]
-            location = self.location_var.get()
-            results = self.bot.apply_to_jobs(keywords=keywords, location=location)
-            
-            msg = f"Applied to {results['applied']} jobs out of {results['searched']}"
-            self.update_job_results(msg + "\n")
-            self.update_status("Finished applying to jobs.")
-        
-        t = threading.Thread(target=worker)
-        t.start()
-    
-    def send_chat_message(self):
-        """Send a chat message to the AI assistant"""
-        if not self.check_bot_initialized_and_authenticated():
-            return
-        
-        user_message = self.chat_input.get().strip()
-        if not user_message:
-            return
-        
-        # Display user message
-        self.add_to_chat("You", user_message)
-        self.chat_input.set("")
-        
-        # Call LM Studio
-        response = self.bot.lm_studio.generate_message(user_message, {})
-        self.add_to_chat("Assistant", response)
-    
-    def load_logs(self):
-        """Load logs from file"""
-        try:
-            with open("linkedin_bot.log", "r") as f:
-                log_content = f.read()
-            
-            self.log_text.config(state=tk.NORMAL)
-            self.log_text.delete("1.0", tk.END)
-            self.log_text.insert(tk.END, log_content)
-            self.log_text.config(state=tk.DISABLED)
-            
-            self.log_text.see(tk.END)
-        except FileNotFoundError:
-            self.log_text.config(state=tk.NORMAL)
-            self.log_text.delete("1.0", tk.END)
-            self.log_text.insert(tk.END, "No log file found.")
-            self.log_text.config(state=tk.DISABLED)
-        except Exception as e:
-            logger.error(f"Error loading logs: {e}")
-    
-    def add_to_chat(self, sender, message):
-        """Add a message to chat history with timestamps and coloring"""
-        self.chat_history.config(state=tk.NORMAL)
-        
-        # Add timestamp
-        timestamp = datetime.now().strftime("%H:%M:%S")
-        self.chat_history.insert(tk.END, f"[{timestamp}] ")
-        
-        # Add sender with styling
-        if sender == "You":
-            self.chat_history.insert(tk.END, f"{sender}: ", "user")
-        elif sender == "Assistant":
-            self.chat_history.insert(tk.END, f"{sender}: ", "assistant")
-        else:
-            self.chat_history.insert(tk.END, f"{sender}: ", "system")
-        
-        # Add message
-        self.chat_history.insert(tk.END, f"{message}\n\n")
-        
-        # Auto-scroll
-        self.chat_history.see(tk.END)
-        self.chat_history.config(state=tk.DISABLED)
-    
-    def update_status(self, message):
-        """Update status bar message"""
-        self.root.after(0, lambda: self.status_var.set(message))
-    
-    def update_recruiter_results(self, message):
-        """Update recruiter results text area"""
-        self._update_text_widget(self.recruiter_results_text, message)
-    
-    def update_job_results(self, message):
-        """Update job results text area"""
-        self._update_text_widget(self.job_results_text, message)
-    
-    def _update_text_widget(self, widget, message):
-        """Helper to update text widget from another thread"""
-        widget.config(state=tk.NORMAL)
-        widget.insert(tk.END, message)
-        widget.see(tk.END)
-        widget.config(state=tk.DISABLED)
-    
-    def check_bot_initialized_and_authenticated(self):
-        """Check if bot is initialized and authenticated"""
-        if not self.is_bot_initialized:
-            messagebox.showerror("Error", "Please initialize the bot first")
-            return False
-        
-        if not self.bot.linkedin.access_token:
-            messagebox.showerror("Error", "Please authenticate with LinkedIn first")
-            return False
-        
-        return True
+                results["failed"] += 1
+            results["details"].append(result)
 
+        return results
 
-def main():
-    """Main function to run the application"""
-    root = tk.Tk()
-    app = LinkedInBotGUI(root)
-    
-    # Configure styles
-    style = ttk.Style()
-    style.configure("TButton", padding=6)
-    style.configure("TLabel", padding=3)
-    
-    # Tag configuration for chat
-    app.chat_history.tag_configure("user", foreground="blue")
-    app.chat_history.tag_configure("assistant", foreground="green")
-    app.chat_history.tag_configure("system", foreground="red")
-    
-    # Auto-refresh logs
-    def refresh_logs():
-        if getattr(app, "auto_refresh_var", None) and app.auto_refresh_var.get():
-            app.load_logs()
-        root.after(5000, refresh_logs)  # Refresh every 5 seconds
-    
-    refresh_logs()
-    
-    root.mainloop()
+    def search_and_apply_jobs(
+        self,
+        keywords: List[str],
+        location: str = "",
+        max_jobs: int = 20,
+        easy_apply_only: bool = True
+    ) -> Dict:
+        """
+        Search for jobs on LinkedIn, optionally apply to them using easy apply.
+        """
+        logger.info("Starting search_and_apply_jobs with keywords=%s, location=%s, max_jobs=%d, easy_apply_only=%s",
+                    keywords, location, max_jobs, easy_apply_only)
+        results = {
+            "searched_jobs": 0,
+            "applied": 0,
+            "failed": 0,
+            "details": []
+        }
+        jobs = self.linkedin.search_jobs(keywords, location, easy_apply_only)
+        results["searched_jobs"] = len(jobs)
 
+        # Just iterate through jobs up to max_jobs
+        for job in jobs[:max_jobs]:
+            job_id = job.get("id")
+            if not job_id:
+                logger.warning("No job ID found in listing, skipping.")
+                continue
 
-if __name__ == "__main__":
-    main()
+            logger.info("Applying to job_id=%s", job_id)
+            success = self.linkedin.apply_to_job(job_id)
+            job_result = {
+                "job_id": job_id,
+                "success": success
+            }
+            if success:
+                results["applied"] += 1
+            else:
+                results["failed"] += 1
+            results["details"].append(job_result)
+
+        return results
+
+    def _fill_template(self, template: str, context: Dict) -> str:
+        """Helper to fill in placeholders in the message template."""
+        for key, value in context.items():
+            template = template.replace(f"{{{key}}}", str(value))
+        return template.strip()
+

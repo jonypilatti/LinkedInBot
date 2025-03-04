@@ -3,6 +3,7 @@
 
 requests
 pytest
+python3-linkedin
 
 # Note:
 # - tkinter is part of the standard library on most systems, but may require extra system packages on some Linux distros.
