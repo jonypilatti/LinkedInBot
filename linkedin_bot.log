@@ -201,3 +201,111 @@
 2025-03-03 19:38:05,038 - linkedin_bot - INFO - Filtering recruiter connections, excluding company=Stori
 2025-03-03 19:38:05,039 - linkedin_bot - INFO - Fetching user connections from LinkedIn.
 2025-03-03 19:38:05,526 - linkedin_bot - ERROR - API request failed: 404 - {"status":404,"code":"RESOURCE_NOT_FOUND","message":"No virtual resource found"}
+2025-03-04 15:44:25,304 - __main__ - INFO - Starting LinkedIn Job Search Bot...
+2025-03-04 15:44:25,304 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 15:44:25,305 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 15:44:25,305 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 15:44:25,306 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 15:44:25,306 - __main__ - ERROR - LinkedIn authentication failed. Exiting.
+2025-03-04 15:44:44,787 - __main__ - INFO - Starting LinkedIn Job Search Bot...
+2025-03-04 15:44:44,787 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 15:44:44,788 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 15:44:44,788 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 15:44:44,788 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 15:44:44,789 - __main__ - ERROR - LinkedIn authentication failed. Exiting.
+2025-03-04 15:46:47,298 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 15:46:47,299 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 15:46:47,300 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 15:46:47,300 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 15:46:47,300 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 15:46:47,301 - __main__ - ERROR - LinkedIn authentication failed. Exiting.
+2025-03-04 15:49:13,963 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 15:49:13,964 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 15:49:13,964 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 15:49:13,964 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 15:49:13,965 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 15:49:13,965 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 15:49:13,965 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 15:49:13,966 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 15:49:13,966 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 15:52:06,434 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 15:52:06,435 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 15:52:06,435 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 15:52:06,436 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 15:52:06,436 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 15:52:06,436 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 15:52:06,436 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 15:52:06,436 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 15:52:06,436 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 15:53:48,428 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 15:53:48,428 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 15:53:48,429 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 15:53:48,429 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 15:53:48,429 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 15:53:48,430 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 15:53:48,430 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 15:53:48,430 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 15:53:48,430 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 16:02:02,304 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 16:02:02,305 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 16:02:02,306 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 16:02:02,306 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 16:02:02,306 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 16:02:02,306 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 16:02:02,307 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 16:02:02,307 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 16:02:02,307 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 16:25:28,503 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 16:25:28,503 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 16:25:28,504 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 16:25:28,504 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 16:25:28,504 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 16:25:28,505 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 16:25:28,505 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 16:25:28,506 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 16:25:28,506 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 16:27:26,296 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 16:27:26,297 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 16:27:26,297 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 16:27:26,297 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 16:27:26,298 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 16:27:26,298 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 16:27:26,298 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 16:27:26,299 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 16:27:26,299 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 16:28:25,057 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 16:28:25,057 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 16:28:25,058 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 16:28:25,058 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 16:28:25,058 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 16:28:25,058 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 16:28:25,059 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 16:28:25,059 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 16:28:25,059 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 16:29:50,275 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 16:29:50,276 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 16:29:50,277 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 16:29:50,277 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 16:29:50,277 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 16:29:50,277 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 16:29:50,278 - __main__ - INFO - Token cargado exitosamente, access_token=
+2025-03-04 16:29:50,278 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 16:29:50,278 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 16:32:49,660 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 16:32:49,661 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 16:32:49,661 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 16:32:49,662 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 16:32:49,662 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 16:32:49,662 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 16:32:49,662 - __main__ - INFO - Token cargado exitosamente.
+2025-03-04 16:32:49,663 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 16:32:49,663 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.
+2025-03-04 16:48:16,545 - __main__ - INFO - Starting LinkedIn Job Search Bot with GUI...
+2025-03-04 16:48:16,547 - __main__ - INFO - Inicializando LinkedInAPI con client_id=, redirect_uri=http://localhost:8000/callback
+2025-03-04 16:48:16,547 - __main__ - INFO - Initializing LMStudioInterface with api_url=http://localhost:1234/v1
+2025-03-04 16:48:16,547 - __main__ - INFO - Initializing LinkedInBot...
+2025-03-04 16:48:16,548 - __main__ - INFO - Attempting LinkedIn authentication in LinkedInBot._initialize()...
+2025-03-04 16:48:16,548 - __main__ - INFO - No se proporcionó auth_code, intentando cargar token existente.
+2025-03-04 16:48:16,548 - __main__ - INFO - Token cargado exitosamente.
+2025-03-04 16:48:16,549 - __main__ - WARNING - No se pudo cargar el token o ha expirado.
+2025-03-04 16:48:16,549 - __main__ - ERROR - Failed to authenticate with LinkedIn. Provide a new code or check config.

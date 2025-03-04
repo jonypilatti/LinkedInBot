@@ -10,5 +10,9 @@
   "options": {
     "current_company": "",
     "skills": "NextJS/Python with FastAPI or NodeJS+ExpressJS"
+  },
+  "retry_policy": {
+    "max_tries": 5,
+    "base_delay": 2.0
   }
 }

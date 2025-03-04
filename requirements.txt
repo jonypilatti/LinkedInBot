@@ -1,10 +1,6 @@
-# requirements.txt
-# Minimal dependencies for LinkedIn Job Search Bot
-
 requests
-pytest
 python3-linkedin
-
-# Note:
-# - tkinter is part of the standard library on most systems, but may require extra system packages on some Linux distros.
-# - LM Studio is a separate application. This file only covers Python dependencies.
+pytest
+backoff
+asyncio
+ttkbootstrap
