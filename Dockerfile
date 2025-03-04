@@ -1,18 +1,21 @@
-# Base image: Python 3.9 (slim for smaller size)
 FROM python:3.9-slim
 
-# Create a working directory
+# Definir el directorio de trabajo
 WORKDIR /app
 
-# Copy requirements and install them
+# Copiar archivos de configuración y requerimientos
 COPY requirements.txt .
+
+# Instalar dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your code
+# Copiar el código fuente
 COPY . .
 
-# Expose any ports if necessary (for a web server, etc.)
-# EXPOSE 8000
+# Configurar variables de entorno necesarias
+ENV LINKEDIN_CLIENT_ID=""
+ENV LINKEDIN_CLIENT_SECRET=""
+ENV REDIRECT_URI="http://localhost:8000/callback"
 
-# Default command: run the client interface
+# Definir el punto de entrada
 ENTRYPOINT ["python", "client_interface.py"]

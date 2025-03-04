@@ -4,21 +4,39 @@ services:
   bot:
     build: .
     container_name: linkedin-bot
-    # If you need to forward environment variables or mount volumes:
-    # environment:
-    #   - LINKEDIN_CLIENT_ID=${LINKEDIN_CLIENT_ID}
-    #   - LINKEDIN_CLIENT_SECRET=${LINKEDIN_CLIENT_SECRET}
+    environment:
+      - LINKEDIN_CLIENT_ID=${LINKEDIN_CLIENT_ID}
+      - LINKEDIN_CLIENT_SECRET=${LINKEDIN_CLIENT_SECRET}
+      - REDIRECT_URI=${REDIRECT_URI}
     volumes:
       - .:/app
-    # If you have a web server, you could map ports here, e.g.:
-    # ports:
-    #   - "8000:8000"
     command: python client_interface.py
+    restart: unless-stopped
+    depends_on:
+      - database
+    networks:
+      - linkedin_bot_network
+
+  database:
+    image: sqlite3
+    container_name: linkedin-db
+    volumes:
+      - sqlite_data:/var/lib/sqlite3
+    networks:
+      - linkedin_bot_network
 
   test:
     build: .
     container_name: linkedin-bot-tests
-    # Reuse the same code and environment
     volumes:
       - .:/app
     command: pytest tests/
+    networks:
+      - linkedin_bot_network
+
+networks:
+  linkedin_bot_network:
+    driver: bridge
+
+volumes:
+  sqlite_data:
