@@ -71,7 +71,7 @@ class LinkedInAPI:
         Otherwise, attempt to load a previously saved token.
         """
         if auth_code:
-            logger.info("Authenticating with LinkedIn using auth_code=%s", auth_code)
+            # logger.info("Authenticating with LinkedIn using auth_code=%s", auth_code)
             try:
                 self.authentication.authorization_code = auth_code
                 token = self.authentication.get_access_token()
