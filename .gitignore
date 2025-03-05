@@ -6,3 +6,4 @@ linkedin_bot_client.log
 __pycache__
 config.json
 linkedin_token.json
+history.db
