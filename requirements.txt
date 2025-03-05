@@ -1,6 +1,5 @@
-requests
-python3-linkedin
-pytest
-backoff
-asyncio
-ttkbootstrap
+selenium>=4.0.0
+webdriver-manager>=3.8.6
+requests>=2.25.1
+python-dotenv>=0.21.0
+ttkbootstrap>=0.5.0
